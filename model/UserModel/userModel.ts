@@ -10,6 +10,10 @@ const userModelSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    password:{
+        type:String,
+        required:true
+    },
    createdAt :{
     type: Date,
     default: Date.now

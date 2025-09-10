@@ -3,16 +3,19 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import { dbConnection } from './database/dbConnection';
 import { createUser } from './controllar/userController/createUser';
+import { loginUser } from './controllar/userController/userLogin';
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
+app.use(express.json())
 
 dbConnection();
 
 //POST
 app.post('/create/user', createUser)
+app.post('/login', loginUser)
 
 
 //GET

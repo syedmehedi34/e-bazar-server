@@ -1,20 +1,26 @@
-
 import { Request, Response } from 'express'
 import userModel from '../../model/UserModel/userModel'
+import bcrypt from 'bcrypt'
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-    const { email, name } = req.body
+    console.log(req.body)
+    const { email, name,password } = req.body
     if (!name || !email) {
       res.status(400).json({ message: 'Name and email are required' })
       return
     }
-    const existUser = await userModel.find({ email: email })
+    const existUser = await userModel.findOne({ email: email })
     if (existUser) {
-      return res.send({ message: 'user already have an account' })
+      return res.status(200).json({
+        message: 'User already exists, you can login',
+        user: existUser
+      })
     }
-    const userData = { email, name }
-    const user = await userModel.insertOne(userData)
+    const haspassword = await bcrypt.hash(password, 10)
+    console.log(haspassword)
+    const userData = { email, name ,password:haspassword}
+    const user = await userModel.create(userData)
     res.status(201).json({
       message: 'User created successfully',
       user
