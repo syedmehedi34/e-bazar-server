@@ -8,7 +8,7 @@ const reviewSchema = new mongoose.Schema({
 
 const productSchema = new mongoose.Schema({
   title: { type: String, required: true, trim: true },
-  description: { type: String, required: true, minlength: 300 },
+  description: { type: String, required: true, },
   price: { type: Number, required: true },
   discountPrice: { type: Number },
   currency: { type: String, default: "BDT" },
