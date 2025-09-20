@@ -7,6 +7,8 @@ import { loginUser } from './controllar/userController/userLogin'
 import { addProducts } from './controllar/productsControllar/add-products'
 import errorhandler from './middleware/errorHandler'
 import asyncHandler from './middleware/asyncHandler'
+import { getRandomProducts } from './controllar/productsControllar/getRandomProducts'
+import { getAllProducts } from './controllar/getAllProducts/getAllProducts'
 
 dotenv.config()
 
@@ -23,7 +25,9 @@ app.post('/login', loginUser)
 app.post('/admin/add-products', asyncHandler(addProducts))
 
 //GET
-
+//admin
+app.get('/get-random-products', asyncHandler(getRandomProducts))
+app.get('/shopping', asyncHandler(getAllProducts))
 //DELETE
 
 //PATCH
