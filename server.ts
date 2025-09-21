@@ -9,6 +9,7 @@ import errorhandler from './middleware/errorHandler'
 import asyncHandler from './middleware/asyncHandler'
 import { getRandomProducts } from './controllar/productsControllar/getRandomProducts'
 import { getAllProducts } from './controllar/getAllProducts/getAllProducts'
+import { Checkout } from './controllar/checkoutControllar/checkout'
 
 dotenv.config()
 
@@ -21,6 +22,8 @@ dbConnection()
 //POST
 app.post('/create/user', createUser)
 app.post('/login', loginUser)
+
+app.get('/checkout/:id', asyncHandler(Checkout))
 //admin
 app.post('/admin/add-products', asyncHandler(addProducts))
 
