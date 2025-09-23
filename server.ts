@@ -10,6 +10,7 @@ import asyncHandler from './middleware/asyncHandler'
 import { getRandomProducts } from './controllar/productsControllar/getRandomProducts'
 import { getAllProducts } from './controllar/getAllProducts/getAllProducts'
 import { Checkout } from './controllar/checkoutControllar/checkout'
+import { CreatePaymentIntent } from './controllar/paymentControllar/payment'
 
 dotenv.config()
 
@@ -22,6 +23,8 @@ dbConnection()
 //POST
 app.post('/create/user', createUser)
 app.post('/login', loginUser)
+// payment api
+app.post('/create-payment-intent', asyncHandler(CreatePaymentIntent) )
 
 app.get('/checkout/:id', asyncHandler(Checkout))
 //admin
