@@ -11,6 +11,7 @@ import { getRandomProducts } from './controllar/productsControllar/getRandomProd
 import { getAllProducts } from './controllar/getAllProducts/getAllProducts'
 import { Checkout } from './controllar/checkoutControllar/checkout'
 import { CreatePaymentIntent } from './controllar/paymentControllar/payment'
+import { AddOrder } from './controllar/orderControllar/addorders'
 
 dotenv.config()
 
@@ -23,6 +24,7 @@ dbConnection()
 //POST
 app.post('/create/user', createUser)
 app.post('/login', loginUser)
+app.post('/order', asyncHandler(AddOrder))
 // payment api
 app.post('/create-payment-intent', asyncHandler(CreatePaymentIntent) )
 
