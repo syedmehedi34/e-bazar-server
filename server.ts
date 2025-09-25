@@ -12,6 +12,8 @@ import { getAllProducts } from './controllar/getAllProducts/getAllProducts'
 import { Checkout } from './controllar/checkoutControllar/checkout'
 import { CreatePaymentIntent } from './controllar/paymentControllar/payment'
 import { AddOrder } from './controllar/orderControllar/addorders'
+import {dashboardCard} from './controllar/DashboardCard/dashboardCard'
+import { getProductsAnalytics } from './controllar/DashboardCard/salesAnalytics'
 
 dotenv.config()
 
@@ -33,9 +35,13 @@ app.get('/checkout/:id', asyncHandler(Checkout))
 app.post('/admin/add-products', asyncHandler(addProducts))
 
 //GET
-//admin
 app.get('/get-random-products', asyncHandler(getRandomProducts))
 app.get('/shopping', asyncHandler(getAllProducts))
+//admin
+app.get('/admin/dashboard/card', asyncHandler(dashboardCard))
+app.get('/admin/sales/analytics', asyncHandler(getProductsAnalytics))
+
+
 //DELETE
 
 //PATCH
