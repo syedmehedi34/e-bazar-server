@@ -14,6 +14,7 @@ import { CreatePaymentIntent } from './controllar/paymentControllar/payment'
 import { AddOrder } from './controllar/orderControllar/addorders'
 import {dashboardCard} from './controllar/DashboardCard/dashboardCard'
 import { getProductsAnalytics } from './controllar/DashboardCard/salesAnalytics'
+import { LatestOrderList } from './controllar/DashboardCard/latestOrderList'
 
 dotenv.config()
 
@@ -24,22 +25,23 @@ app.use(express.json())
 dbConnection()
 
 //POST
-app.post('/create/user', createUser)
-app.post('/login', loginUser)
-app.post('/order', asyncHandler(AddOrder))
+app.post('/create/user', createUser);
+app.post('/login', loginUser);
+app.post('/order', asyncHandler(AddOrder));
 // payment api
-app.post('/create-payment-intent', asyncHandler(CreatePaymentIntent) )
+app.post('/create-payment-intent', asyncHandler(CreatePaymentIntent) );
 
-app.get('/checkout/:id', asyncHandler(Checkout))
+app.get('/checkout/:id', asyncHandler(Checkout));
 //admin
-app.post('/admin/add-products', asyncHandler(addProducts))
+app.post('/admin/add-products', asyncHandler(addProducts));
 
 //GET
-app.get('/get-random-products', asyncHandler(getRandomProducts))
-app.get('/shopping', asyncHandler(getAllProducts))
+app.get('/get-random-products', asyncHandler(getRandomProducts));
+app.get('/shopping', asyncHandler(getAllProducts));
 //admin
-app.get('/admin/dashboard/card', asyncHandler(dashboardCard))
-app.get('/admin/sales/analytics', asyncHandler(getProductsAnalytics))
+app.get('/admin/dashboard/card', asyncHandler(dashboardCard));
+app.get('/admin/sales/analytics', asyncHandler(getProductsAnalytics));
+app.get('/admin/latest/order', asyncHandler(LatestOrderList));
 
 
 //DELETE
