@@ -15,6 +15,7 @@ import { AddOrder } from './controllar/orderControllar/addorders'
 import {dashboardCard} from './controllar/DashboardCard/dashboardCard'
 import { getProductsAnalytics } from './controllar/DashboardCard/salesAnalytics'
 import { LatestOrderList } from './controllar/DashboardCard/latestOrderList'
+import { ProductsList } from './controllar/DashboardCard/productsList'
 
 dotenv.config()
 
@@ -42,6 +43,7 @@ app.get('/shopping', asyncHandler(getAllProducts));
 app.get('/admin/dashboard/card', asyncHandler(dashboardCard));
 app.get('/admin/sales/analytics', asyncHandler(getProductsAnalytics));
 app.get('/admin/latest/order', asyncHandler(LatestOrderList));
+app.get('/admin/products/list',asyncHandler(ProductsList))
 
 
 //DELETE
