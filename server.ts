@@ -16,6 +16,7 @@ import {dashboardCard} from './controllar/DashboardCard/dashboardCard'
 import { getProductsAnalytics } from './controllar/DashboardCard/salesAnalytics'
 import { LatestOrderList } from './controllar/DashboardCard/latestOrderList'
 import { ProductsList } from './controllar/DashboardCard/productsList'
+import { ProductUpdateById } from './controllar/DashboardCard/productsUpdate'
 
 dotenv.config()
 
@@ -49,7 +50,7 @@ app.get('/admin/products/list',asyncHandler(ProductsList))
 //DELETE
 
 //PATCH
-
+app.patch('/products', asyncHandler(ProductUpdateById))
 //PUT
 
 app.use(errorhandler)
