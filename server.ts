@@ -19,6 +19,12 @@ import { ProductsList } from './controllar/DashboardCard/productsList'
 import { ProductUpdateById } from './controllar/DashboardCard/productsUpdate'
 import { ProductsDeleteById } from './controllar/DashboardCard/productsDeletedById'
 
+import { Orders } from './controllar/DashboardCard/orders'
+import { PaymentStatusUpdate } from './controllar/DashboardCard/PaymentsStatus'
+
+
+
+
 dotenv.config()
 
 const app = express()
@@ -45,7 +51,8 @@ app.get('/shopping', asyncHandler(getAllProducts));
 app.get('/admin/dashboard/card', asyncHandler(dashboardCard));
 app.get('/admin/sales/analytics', asyncHandler(getProductsAnalytics));
 app.get('/admin/latest/order', asyncHandler(LatestOrderList));
-app.get('/admin/products/list',asyncHandler(ProductsList))
+app.get('/admin/products/list',asyncHandler(ProductsList));
+app.get('/admin/order', asyncHandler(Orders))
 
 
 //DELETE
@@ -53,7 +60,8 @@ app.get('/admin/products/list',asyncHandler(ProductsList))
 app.delete('/admin/products/:id', asyncHandler(ProductsDeleteById))
 
 //PATCH
-app.patch('/products', asyncHandler(ProductUpdateById))
+app.patch('/products', asyncHandler(ProductUpdateById));
+app.patch('/admin/orders/payment-status', asyncHandler(PaymentStatusUpdate))
 //PUT
 
 app.use(errorhandler)
