@@ -14,7 +14,7 @@ export const ProductUpdateById = async (req: Request, res: Response) => {
   if (!updatedProduct) {
     return res.status(404).json({ message: 'Product not found' })
   }
-
+ 
   console.log(updatedProduct)
 
   res.status(200).json({
