@@ -1,22 +1,26 @@
 import { Request, Response } from "express";
-import ProductsModel from "../../model/productsModel/productsModel";
-
+import Order from "../../model/ordersModel/ordersModel";
 
 export const getProductsAnalytics = async (req: Request, res: Response) => {
-
-  
-    const products = await ProductsModel.find({}, "title price rating createdAt").lean();
-
-
-    const formattedData = products.map((item) => ({
-      name: item.title,
-      price: item.price,
-      rating: item.rating,
-     date: item.createdAt
-        ? new Date(item.createdAt).toISOString().split("T")[0] 
-        : "N/A",
-    }));
-
-    res.status(200).json(formattedData);
-  
+    try {
+        const orders: any[] = await Order.find(
+            {},
+            "product.name product.totalPrice payment.amount payment.paymentStatus createdAt"
+        ).lean();
+   
+        const formattedData = orders.map((order) => ({
+            name: order.product?.name,
+            totalPrice: order.product?.totalPrice,
+            amount: order.payment?.amount,
+            paymentStatus: order.payment?.paymentStatus,
+            date: order.createdAt
+                ? new Date(order?.createdAt).toISOString().split("T")[0]
+                : "N/A",
+        }));
+             console.log(formattedData)
+        res.status(200).json(formattedData);
+    } catch (error) {
+        console.error("OrdersAnalytics Error:", error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
 };

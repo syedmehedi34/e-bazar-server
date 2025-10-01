@@ -21,6 +21,7 @@ import { ProductsDeleteById } from './controllar/DashboardCard/productsDeletedBy
 
 import { Orders } from './controllar/DashboardCard/orders'
 import { PaymentStatusUpdate } from './controllar/DashboardCard/PaymentsStatus'
+import { ReportCard } from './controllar/DashboardCard/reportCard'
 
 
 
@@ -52,7 +53,8 @@ app.get('/admin/dashboard/card', asyncHandler(dashboardCard));
 app.get('/admin/sales/analytics', asyncHandler(getProductsAnalytics));
 app.get('/admin/latest/order', asyncHandler(LatestOrderList));
 app.get('/admin/products/list',asyncHandler(ProductsList));
-app.get('/admin/order', asyncHandler(Orders))
+app.get('/admin/order', asyncHandler(Orders));
+app.get('/admin/report', asyncHandler(ReportCard))
 
 
 //DELETE

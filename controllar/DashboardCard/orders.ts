@@ -6,7 +6,7 @@ export const Orders = async (req: Request, res: Response) => {
   const sort = req.query.sort
   const search = req.query.search
   const page = parseInt(pageParam)
-  const limit = 5
+  const limit = 8
   const skip = (page - 1) * limit
 
   const query: any = {}
@@ -30,10 +30,6 @@ export const Orders = async (req: Request, res: Response) => {
     switch (sort) {
       case "latest":
         sortOptions.createdAt = -1;
-        break;
-
-      case "older":
-        sortOptions.createdAt = 1;
         break;
 
       case "low-high":
