@@ -22,6 +22,8 @@ import { ProductsDeleteById } from './controllar/DashboardCard/productsDeletedBy
 import { Orders } from './controllar/DashboardCard/orders'
 import { PaymentStatusUpdate } from './controllar/DashboardCard/PaymentsStatus'
 import { ReportCard } from './controllar/DashboardCard/reportCard'
+import { AllUserList } from './controllar/DashboardCard/userList'
+import { UserUpdateById } from './controllar/DashboardCard/userUpdateById'
 
 
 
@@ -54,7 +56,8 @@ app.get('/admin/sales/analytics', asyncHandler(getProductsAnalytics));
 app.get('/admin/latest/order', asyncHandler(LatestOrderList));
 app.get('/admin/products/list',asyncHandler(ProductsList));
 app.get('/admin/order', asyncHandler(Orders));
-app.get('/admin/report', asyncHandler(ReportCard))
+app.get('/admin/report', asyncHandler(ReportCard));
+app.get('/admin/user-list', asyncHandler(AllUserList))
 
 
 //DELETE
@@ -63,7 +66,8 @@ app.delete('/admin/products/:id', asyncHandler(ProductsDeleteById))
 
 //PATCH
 app.patch('/products', asyncHandler(ProductUpdateById));
-app.patch('/admin/orders/payment-status', asyncHandler(PaymentStatusUpdate))
+app.patch('/admin/orders/payment-status', asyncHandler(PaymentStatusUpdate));
+app.patch('/admin/user-update/:id', asyncHandler(UserUpdateById))
 //PUT
 
 app.use(errorhandler)

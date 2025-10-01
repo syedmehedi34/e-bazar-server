@@ -4,7 +4,7 @@ import ProductsModel from '../../model/productsModel/productsModel'
 export const ProductUpdateById = async (req: Request, res: Response) => {
   const id = req.query._id
   const updateData = req.body
-  console.log(id,updateData)
+
   const updatedProduct = await ProductsModel.findByIdAndUpdate(
     id,
     { $set: updateData },
@@ -15,7 +15,7 @@ export const ProductUpdateById = async (req: Request, res: Response) => {
     return res.status(404).json({ message: 'Product not found' })
   }
  
-  console.log(updatedProduct)
+  
 
   res.status(200).json({
     message: 'Product updated successfully',

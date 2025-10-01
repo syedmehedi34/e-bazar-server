@@ -8,7 +8,7 @@ export const dashboardCard = async (req: Request, res: Response) => {
     const [totalSalesResult, totalUsers, totalProducts, totalOrders] =
       await Promise.all([
         Order.aggregate([
-          { $match: { "payment.paymentStatus": "pending" } },
+          { $match: { "payment.paymentStatus": "paid" } },
           {
             $group: {
               _id: null,
