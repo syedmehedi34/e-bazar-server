@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import userModel from "../../model/UserModel/userModel";
+import userModel from "../../../model/UserModel/userModel";
+
 
 export const AllUserList = async (req: Request, res: Response) => {
     const pageParam = (req.query.page as string) || '1'
