@@ -25,6 +25,7 @@ import { ReportCard } from './controllar/DashboardCard/reportCard'
 import { AllUserList } from './controllar/DashboardCard/User/userList'
 import { UserUpdateById } from './controllar/DashboardCard/User/userUpdateById'
 import { UserDeleteByid } from './controllar/DashboardCard/User/userDeleteById'
+import { UserOrders } from './controllar/UserOrdersControllar/userOrders'
 
 
 
@@ -52,6 +53,7 @@ app.post('/admin/add-products', asyncHandler(addProducts));
 //GET
 app.get('/get-random-products', asyncHandler(getRandomProducts));
 app.get('/shopping', asyncHandler(getAllProducts));
+app.get('/user-orders', asyncHandler(UserOrders))
 //admin
 app.get('/admin/dashboard/card', asyncHandler(dashboardCard));
 app.get('/admin/sales/analytics', asyncHandler(getProductsAnalytics));
