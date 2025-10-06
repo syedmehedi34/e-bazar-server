@@ -26,6 +26,7 @@ import { AllUserList } from './controllar/DashboardCard/User/userList'
 import { UserUpdateById } from './controllar/DashboardCard/User/userUpdateById'
 import { UserDeleteByid } from './controllar/DashboardCard/User/userDeleteById'
 import { UserOrders } from './controllar/UserOrdersControllar/userOrders'
+import { UserOrderscancelById } from './controllar/UserOrdersControllar/userOrderCancelById'
 
 
 
@@ -67,7 +68,8 @@ app.get('/admin/user-list', asyncHandler(AllUserList))
 //DELETE
 
 app.delete('/admin/products/:id', asyncHandler(ProductsDeleteById));
-app.delete('/admin/user-delete/:id', asyncHandler(UserDeleteByid))
+app.delete('/admin/user-delete/:id', asyncHandler(UserDeleteByid));
+app.delete('/user/order/:id', asyncHandler(UserOrderscancelById))
 
 //PATCH
 app.patch('/products', asyncHandler(ProductUpdateById));

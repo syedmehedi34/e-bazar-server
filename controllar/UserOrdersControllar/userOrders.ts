@@ -56,7 +56,7 @@ export const UserOrders = async (req: Request, res: Response) => {
             pageArray,
            
         });
-console.log(orders)
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Internal server error" });
