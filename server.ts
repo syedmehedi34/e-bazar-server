@@ -27,6 +27,7 @@ import { UserUpdateById } from './controllar/DashboardCard/User/userUpdateById'
 import { UserDeleteByid } from './controllar/DashboardCard/User/userDeleteById'
 import { UserOrders } from './controllar/UserOrdersControllar/userOrders'
 import { UserOrderscancelById } from './controllar/UserOrdersControllar/userOrderCancelById'
+import { BlogsPost } from './controllar/BlogsControllar/blogsPost'
 
 
 
@@ -46,7 +47,7 @@ app.post('/login', loginUser);
 app.post('/order', asyncHandler(AddOrder));
 // payment api
 app.post('/create-payment-intent', asyncHandler(CreatePaymentIntent) );
-
+app.post('/blog', asyncHandler(BlogsPost))
 app.get('/checkout/:id', asyncHandler(Checkout));
 //admin
 app.post('/admin/add-products', asyncHandler(addProducts));

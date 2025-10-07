@@ -27,6 +27,7 @@ export const UserOrders = async (req: Request, res: Response) => {
                     totalCanceled: {
                         $sum: { $cond: [{ $eq: ["$payment.orderStatus", "canceled"] }, 1, 0] },
                     },
+                     totalAmount: { $sum: "$payment.amount" },
                 },
             },
         ]);
@@ -51,6 +52,7 @@ export const UserOrders = async (req: Request, res: Response) => {
                 totalPaid: 0,
                 totalPending: 0,
                 totalCanceled: 0,
+                totalAmount:0
             },
             orders,
             pageArray,
