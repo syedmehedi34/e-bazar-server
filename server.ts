@@ -28,6 +28,7 @@ import { UserDeleteByid } from './controllar/DashboardCard/User/userDeleteById'
 import { UserOrders } from './controllar/UserOrdersControllar/userOrders'
 import { UserOrderscancelById } from './controllar/UserOrdersControllar/userOrderCancelById'
 import { BlogsPost } from './controllar/BlogsControllar/blogsPost'
+import { GetAllBlogs } from './controllar/BlogsControllar/getBlogsData'
 
 
 
@@ -55,7 +56,8 @@ app.post('/admin/add-products', asyncHandler(addProducts));
 //GET
 app.get('/get-random-products', asyncHandler(getRandomProducts));
 app.get('/shopping', asyncHandler(getAllProducts));
-app.get('/user-orders', asyncHandler(UserOrders))
+app.get('/user-orders', asyncHandler(UserOrders));
+app.get('/blogs', asyncHandler(GetAllBlogs))
 //admin
 app.get('/admin/dashboard/card', asyncHandler(dashboardCard));
 app.get('/admin/sales/analytics', asyncHandler(getProductsAnalytics));

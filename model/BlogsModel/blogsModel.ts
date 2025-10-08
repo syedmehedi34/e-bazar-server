@@ -60,7 +60,9 @@ const BlogSchema = new mongoose.Schema({
     type: [CommentSchema],
     default: [],
   },
-});
+
+
+},{ timestamps: { createdAt: "createdAdt", updatedAt: "updatedAdt" } });
 
 const Blog = mongoose.models.Blog || mongoose.model("Blog", BlogSchema);
 
