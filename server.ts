@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
+import cookieParser from "cookie-parser";
 import { dbConnection } from './database/dbConnection'
 import { createUser } from './controllar/userController/createUser'
 import { loginUser } from './controllar/userController/userLogin'
@@ -12,7 +13,7 @@ import { getAllProducts } from './controllar/getAllProducts/getAllProducts'
 import { Checkout } from './controllar/checkoutControllar/checkout'
 import { CreatePaymentIntent } from './controllar/paymentControllar/payment'
 import { AddOrder } from './controllar/orderControllar/addorders'
-import {dashboardCard} from './controllar/DashboardCard/dashboardCard'
+import { dashboardCard } from './controllar/DashboardCard/dashboardCard'
 import { getProductsAnalytics } from './controllar/DashboardCard/salesAnalytics'
 import { LatestOrderList } from './controllar/DashboardCard/latestOrderList'
 import { ProductsList } from './controllar/DashboardCard/productsList'
@@ -29,25 +30,33 @@ import { UserOrders } from './controllar/UserOrdersControllar/userOrders'
 import { UserOrderscancelById } from './controllar/UserOrdersControllar/userOrderCancelById'
 import { BlogsPost } from './controllar/BlogsControllar/blogsPost'
 import { GetAllBlogs } from './controllar/BlogsControllar/getBlogsData'
-
-
+import { jwtTokenVerification } from './middleware/jwtTokenVerification'
 
 
 
 dotenv.config()
 
 const app = express()
-app.use(cors())
-app.use(express.json())
+app.use(
+  cors({
+    origin: ['http://localhost:3000'], 
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  })
+)
 
+app.use(cookieParser());
+app.use(express.json())
 dbConnection()
+
 
 //POST
 app.post('/create/user', createUser);
 app.post('/login', loginUser);
 app.post('/order', asyncHandler(AddOrder));
 // payment api
-app.post('/create-payment-intent', asyncHandler(CreatePaymentIntent) );
+app.post('/create-payment-intent', asyncHandler(CreatePaymentIntent));
 app.post('/blog', asyncHandler(BlogsPost))
 app.get('/checkout/:id', asyncHandler(Checkout));
 //admin
@@ -55,24 +64,24 @@ app.post('/admin/add-products', asyncHandler(addProducts));
 
 //GET
 app.get('/get-random-products', asyncHandler(getRandomProducts));
-app.get('/shopping', asyncHandler(getAllProducts));
+app.get('/shopping',  asyncHandler(getAllProducts));
 app.get('/user-orders', asyncHandler(UserOrders));
 app.get('/blogs', asyncHandler(GetAllBlogs))
 //admin
-app.get('/admin/dashboard/card', asyncHandler(dashboardCard));
-app.get('/admin/sales/analytics', asyncHandler(getProductsAnalytics));
-app.get('/admin/latest/order', asyncHandler(LatestOrderList));
-app.get('/admin/products/list',asyncHandler(ProductsList));
-app.get('/admin/order', asyncHandler(Orders));
-app.get('/admin/report', asyncHandler(ReportCard));
-app.get('/admin/user-list', asyncHandler(AllUserList))
+app.get('/admin/dashboard/card', jwtTokenVerification, asyncHandler(dashboardCard));
+app.get('/admin/sales/analytics', jwtTokenVerification, asyncHandler(getProductsAnalytics));
+app.get('/admin/latest/order', jwtTokenVerification, asyncHandler(LatestOrderList));
+app.get('/admin/products/list', jwtTokenVerification, asyncHandler(ProductsList));
+app.get('/admin/order', jwtTokenVerification, asyncHandler(Orders));
+app.get('/admin/report', jwtTokenVerification, asyncHandler(ReportCard));
+app.get('/admin/user-list', jwtTokenVerification, asyncHandler(AllUserList))
 
 
 //DELETE
 
-app.delete('/admin/products/:id', asyncHandler(ProductsDeleteById));
-app.delete('/admin/user-delete/:id', asyncHandler(UserDeleteByid));
-app.delete('/user/order/:id', asyncHandler(UserOrderscancelById))
+app.delete('/admin/products/:id', jwtTokenVerification, asyncHandler(ProductsDeleteById));
+app.delete('/admin/user-delete/:id', jwtTokenVerification, asyncHandler(UserDeleteByid));
+app.delete('/user/order/:id', jwtTokenVerification, asyncHandler(UserOrderscancelById))
 
 //PATCH
 app.patch('/products', asyncHandler(ProductUpdateById));

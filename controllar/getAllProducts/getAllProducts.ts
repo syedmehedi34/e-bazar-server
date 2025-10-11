@@ -3,6 +3,7 @@ import ProductsModel from '../../model/productsModel/productsModel';
 
 export const getAllProducts = async (req: Request, res: Response) => {
   try {
+   
     const {
       sort,
       category,

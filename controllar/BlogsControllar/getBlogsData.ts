@@ -4,7 +4,7 @@ import Blog from "../../model/BlogsModel/blogsModel";
 export const GetAllBlogs = async (req: Request, res: Response) => {
     try {
         const page = parseInt(req.query.page as string) || 1; 
-        const limit = 3; 
+        const limit = 4; 
 
         const totalBlogs = await Blog.countDocuments();
         const totalPages = Math.ceil(totalBlogs / limit);
@@ -18,7 +18,7 @@ export const GetAllBlogs = async (req: Request, res: Response) => {
         // Page array for frontend pagination buttons
         const pageArray = Array.from({ length: totalPages }, (_, i) => i + 1);
 
-        res.status(200).json({
+        res.status(200).send({
             blogs,
             pageArray,
            
