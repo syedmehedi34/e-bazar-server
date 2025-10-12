@@ -39,7 +39,7 @@ dotenv.config()
 const app = express()
 app.use(
   cors({
-    origin: ['http://localhost:3000'], 
+    origin: ['http://localhost:3000',"https://e-bazaar-client.vercel.app/"], 
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
