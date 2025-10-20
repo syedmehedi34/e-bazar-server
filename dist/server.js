@@ -34,11 +34,11 @@ const userOrders_1 = require("./controllar/UserOrdersControllar/userOrders");
 const userOrderCancelById_1 = require("./controllar/UserOrdersControllar/userOrderCancelById");
 const blogsPost_1 = require("./controllar/BlogsControllar/blogsPost");
 const getBlogsData_1 = require("./controllar/BlogsControllar/getBlogsData");
-const jwtTokenVerification_1 = require("./middleware/jwtTokenVerification");
+const userOrderById_1 = require("./controllar/UserOrdersControllar/userOrderById");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: ['http://localhost:3000', "https://e-bazaar-client.vercel.app/"],
+    origin: ['http://localhost:3000', "https://e-bazaar-client.vercel.app"],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
@@ -61,18 +61,19 @@ app.get('/get-random-products', (0, asyncHandler_1.default)(getRandomProducts_1.
 app.get('/shopping', (0, asyncHandler_1.default)(getAllProducts_1.getAllProducts));
 app.get('/user-orders', (0, asyncHandler_1.default)(userOrders_1.UserOrders));
 app.get('/blogs', (0, asyncHandler_1.default)(getBlogsData_1.GetAllBlogs));
+app.get('/user/order/:id', (0, asyncHandler_1.default)(userOrderById_1.UserOrderById));
 //admin
-app.get('/admin/dashboard/card', jwtTokenVerification_1.jwtTokenVerification, (0, asyncHandler_1.default)(dashboardCard_1.dashboardCard));
-app.get('/admin/sales/analytics', jwtTokenVerification_1.jwtTokenVerification, (0, asyncHandler_1.default)(salesAnalytics_1.getProductsAnalytics));
-app.get('/admin/latest/order', jwtTokenVerification_1.jwtTokenVerification, (0, asyncHandler_1.default)(latestOrderList_1.LatestOrderList));
-app.get('/admin/products/list', jwtTokenVerification_1.jwtTokenVerification, (0, asyncHandler_1.default)(productsList_1.ProductsList));
-app.get('/admin/order', jwtTokenVerification_1.jwtTokenVerification, (0, asyncHandler_1.default)(orders_1.Orders));
-app.get('/admin/report', jwtTokenVerification_1.jwtTokenVerification, (0, asyncHandler_1.default)(reportCard_1.ReportCard));
-app.get('/admin/user-list', jwtTokenVerification_1.jwtTokenVerification, (0, asyncHandler_1.default)(userList_1.AllUserList));
+app.get('/admin/dashboard/card', (0, asyncHandler_1.default)(dashboardCard_1.dashboardCard));
+app.get('/admin/sales/analytics', (0, asyncHandler_1.default)(salesAnalytics_1.getProductsAnalytics));
+app.get('/admin/latest/order', (0, asyncHandler_1.default)(latestOrderList_1.LatestOrderList));
+app.get('/admin/products/list', (0, asyncHandler_1.default)(productsList_1.ProductsList));
+app.get('/admin/order', (0, asyncHandler_1.default)(orders_1.Orders));
+app.get('/admin/report', (0, asyncHandler_1.default)(reportCard_1.ReportCard));
+app.get('/admin/user-list', (0, asyncHandler_1.default)(userList_1.AllUserList));
 //DELETE
-app.delete('/admin/products/:id', jwtTokenVerification_1.jwtTokenVerification, (0, asyncHandler_1.default)(productsDeletedById_1.ProductsDeleteById));
-app.delete('/admin/user-delete/:id', jwtTokenVerification_1.jwtTokenVerification, (0, asyncHandler_1.default)(userDeleteById_1.UserDeleteByid));
-app.delete('/user/order/:id', jwtTokenVerification_1.jwtTokenVerification, (0, asyncHandler_1.default)(userOrderCancelById_1.UserOrderscancelById));
+app.delete('/admin/products/:id', (0, asyncHandler_1.default)(productsDeletedById_1.ProductsDeleteById));
+app.delete('/admin/user-delete/:id', (0, asyncHandler_1.default)(userDeleteById_1.UserDeleteByid));
+app.delete('/user/order/:id', (0, asyncHandler_1.default)(userOrderCancelById_1.UserOrderscancelById));
 //PATCH
 app.patch('/products', (0, asyncHandler_1.default)(productsUpdate_1.ProductUpdateById));
 app.patch('/admin/orders/payment-status', (0, asyncHandler_1.default)(PaymentsStatus_1.PaymentStatusUpdate));

@@ -31,6 +31,7 @@ import { UserOrderscancelById } from './controllar/UserOrdersControllar/userOrde
 import { BlogsPost } from './controllar/BlogsControllar/blogsPost'
 import { GetAllBlogs } from './controllar/BlogsControllar/getBlogsData'
 import { jwtTokenVerification } from './middleware/jwtTokenVerification'
+import { UserOrderById } from './controllar/UserOrdersControllar/userOrderById';
 
 
 
@@ -39,7 +40,7 @@ dotenv.config()
 const app = express()
 app.use(
   cors({
-    origin: ['http://localhost:3000',"https://e-bazaar-client.vercel.app/"], 
+    origin: ['http://localhost:3000',"https://e-bazaar-client.vercel.app"], 
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
@@ -66,22 +67,23 @@ app.post('/admin/add-products', asyncHandler(addProducts));
 app.get('/get-random-products', asyncHandler(getRandomProducts));
 app.get('/shopping',  asyncHandler(getAllProducts));
 app.get('/user-orders', asyncHandler(UserOrders));
-app.get('/blogs', asyncHandler(GetAllBlogs))
+app.get('/blogs', asyncHandler(GetAllBlogs));
+app.get('/user/order/:id', asyncHandler(UserOrderById))
 //admin
-app.get('/admin/dashboard/card', jwtTokenVerification, asyncHandler(dashboardCard));
-app.get('/admin/sales/analytics', jwtTokenVerification, asyncHandler(getProductsAnalytics));
-app.get('/admin/latest/order', jwtTokenVerification, asyncHandler(LatestOrderList));
-app.get('/admin/products/list', jwtTokenVerification, asyncHandler(ProductsList));
-app.get('/admin/order', jwtTokenVerification, asyncHandler(Orders));
-app.get('/admin/report', jwtTokenVerification, asyncHandler(ReportCard));
-app.get('/admin/user-list', jwtTokenVerification, asyncHandler(AllUserList))
+app.get('/admin/dashboard/card',  asyncHandler(dashboardCard));
+app.get('/admin/sales/analytics',  asyncHandler(getProductsAnalytics));
+app.get('/admin/latest/order',  asyncHandler(LatestOrderList));
+app.get('/admin/products/list',  asyncHandler(ProductsList));
+app.get('/admin/order',  asyncHandler(Orders));
+app.get('/admin/report',  asyncHandler(ReportCard));
+app.get('/admin/user-list',  asyncHandler(AllUserList))
 
 
 //DELETE
 
-app.delete('/admin/products/:id', jwtTokenVerification, asyncHandler(ProductsDeleteById));
-app.delete('/admin/user-delete/:id', jwtTokenVerification, asyncHandler(UserDeleteByid));
-app.delete('/user/order/:id', jwtTokenVerification, asyncHandler(UserOrderscancelById))
+app.delete('/admin/products/:id',  asyncHandler(ProductsDeleteById));
+app.delete('/admin/user-delete/:id',  asyncHandler(UserDeleteByid));
+app.delete('/user/order/:id',  asyncHandler(UserOrderscancelById))
 
 //PATCH
 app.patch('/products', asyncHandler(ProductUpdateById));
